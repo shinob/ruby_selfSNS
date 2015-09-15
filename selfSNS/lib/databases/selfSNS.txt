@@ -1,0 +1,27 @@
+CREATE TABLE `notes`(
+  id integer primary key,
+  user_id integer,
+  note_id integer,
+  note_type text,
+  upload_date date,
+  comment text
+);
+
+CREATE TABLE `users`(
+  id integer primary key,
+  disp_name text,
+  name text,
+  password text,
+  auth_type text
+);
+
+CREATE TABLE `profiles`(
+  id integer primary key,
+  user_id integer,
+  title text,
+  value text
+);
+
+INSERT INTO users VALUES (1, "administrator", "admin", "admin", "admin");
+INSERT INTO users VALUES (2, "user", "user", "user", "user");
+INSERT INTO users VALUES (3, "guest", "guest", "guest", "guest");
