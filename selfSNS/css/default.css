@@ -10,6 +10,10 @@ body {
 	background-color: #EEE;
 }
 
+th, td {
+	padding: 5px;
+}
+
 #menu {
 	border-bottom: 1px solid #000;
 	background-color: #CCC;
