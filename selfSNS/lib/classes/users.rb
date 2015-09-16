@@ -285,30 +285,7 @@ EOF
   
   def get_login_form()
     
-    html = <<EOF
-<form method="post" id="login_form">
-  <input type="hidden" name="mode" value="login" />
-  <table>
-    <tr>
-      <td colspan=2><div id="login_message">_%message%_</div></td>
-    </tr>
-    <tr>
-      <th>ユーザー名</th>
-      <td><input type="text" name="name" onfocus="getDiv('login_message').innerHTML='&nbsp;'" /></td>
-    </tr>
-    <tr>
-      <th>パスワード</th>
-      <td><input type="password" name="pass" /></td>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
-      <td><input type="submit" value="ログイン" /></td>
-    </tr>
-  </table>
-</form>
-EOF
-    
-    return make_html_by_values({"message" => @message}, html)
+    return load_template({"message" => @message}, "login.html")
     
   end
   

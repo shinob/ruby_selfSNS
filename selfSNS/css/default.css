@@ -10,6 +10,10 @@ body {
 	background-color: #EEE;
 }
 
+th, td {
+	padding: 5px;
+}
+
 #menu {
 	border-bottom: 1px solid #000;
 	background-color: #CCC;
@@ -48,7 +52,7 @@ body {
 	float: right;
 	padding-left: 10px;
 	line-height: 50px;
-	border: 1px solid #F00;
+	border: 0px solid #F00;
 }
 
 #post_note {
@@ -60,3 +64,6 @@ body {
 	height: 100px;
 }
 
+#login_message {
+	line-height: 40px;
+}

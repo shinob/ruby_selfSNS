@@ -13,13 +13,7 @@ class SelfSNS
     html = ""
     
     if $usr.is_login() then
-      #html = $usr.get_logout_form()
-      html += post_note_form()
-      html += post_photo_form()
-      html += "<p>ID = #{$usr.get_id()}</p>"
-      
-      menu_logout()
-      menu_profile()
+      html += make_content()
     else
       html = $usr.get_login_form()
       menu_space()
@@ -33,7 +27,33 @@ class SelfSNS
     output(html)
     
   end
-
+  
+  def make_content()
+    
+    mode = $_POST["mode"]
+    
+    html = ""
+    
+    case mode
+    when "post_note"
+      obj = Notes.new()
+      obj.save_text()
+    else
+      
+    end
+    
+    #html = $usr.get_logout_form()
+    html += post_note_form()
+    html += post_photo_form()
+    html += "<p>ID = #{$usr.get_id()}</p>"
+    
+    menu_logout()
+    menu_profile()
+    
+    return html
+      
+  end
+  
   def output(html)
     
     #menu = "トップ"

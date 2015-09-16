@@ -3,7 +3,7 @@ CREATE TABLE `notes`(
   user_id integer,
   note_id integer,
   note_type text,
-  upload_date date,
+  post_date date,
   comment text
 );
 

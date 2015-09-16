@@ -5,12 +5,16 @@ class Notes < Model
     @type = "notes"
   end
   
-  def save_comment()
+  def save_text()
+    
+    t = Time.now
     
     $_POST["id"] = 0
-    $_POST["user_id"] = 0
+    $_POST["user_id"] = $usr.get_id()
+    $_POST["note_type"] = "text"
+    $_POST["post_date"] = t.strftime("%Y-%m-%d %H:%M:%S")
     
-    
+    return apply($_POST)
     
   end
   
