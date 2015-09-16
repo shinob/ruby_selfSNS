@@ -2,8 +2,8 @@ class SelfSNS
 
   def initialize()
     @style = ""
-    @page_title = "SELF SNS"
-    @title = "TITLE"
+    @page_title = "営農 意見交換"
+    @title = "営農 意見交換"
     @foot = "<a href='https://github.com/shinob/ruby_selfSNS' target='_blank'>ruby_selfSNS@GitHub</a>"
     @menu = ""
   end
@@ -20,8 +20,10 @@ class SelfSNS
       #@title = "ログイン"
     end
     
-    $_POST.each do |key, val|
-      html += "<div>#{key} = #{val}</div>"
+    if true then
+      $_POST.each do |key, val|
+        html += "<div>#{key} = #{val}</div>"
+      end
     end
     
     output(html)
@@ -31,12 +33,12 @@ class SelfSNS
   def make_content()
     
     mode = $_POST["mode"]
+    obj = Notes.new()
     
     html = ""
     
     case mode
     when "post_note"
-      obj = Notes.new()
       obj.save_text()
     else
       
@@ -45,10 +47,14 @@ class SelfSNS
     #html = $usr.get_logout_form()
     html += post_note_form()
     html += post_photo_form()
-    html += "<p>ID = #{$usr.get_id()}</p>"
+    #html += "<p>ID = #{$usr.get_id()}</p>"
+    
+    html += obj.show()
     
     menu_logout()
     menu_profile()
+    menu_reload()
+    menu_left()
     
     return html
       
@@ -73,15 +79,25 @@ class SelfSNS
   end
   
   def menu_space()
-    @menu += "<div class='item'>&nbsp</div>"
+    @menu += "<div class='item-right'>&nbsp</div>"
   end
   
   def menu_profile()
-    @menu += "<div class='item'>プロファイル</div>"
+    #@menu += "<div class='item-right'>プロファイル</div>"
   end
   
   def menu_logout()
-    @menu += "<div class='item' onClick='snsLogout();'>ログアウト</div>"
+    @menu += "<div class='item-right' onClick='snsLogout();'>ログアウト</div>"
+  end
+  
+  def menu_reload()
+    @menu += <<EOF
+<div class='item-right' onClick='location.href="/";'>最新に更新</div>
+EOF
+  end
+  
+  def menu_left()
+    @menu += load_template({}, "menu_left.html")
   end
   
   def post_note_form()

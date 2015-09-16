@@ -18,6 +18,20 @@ class Notes < Model
     
   end
   
+  def show()
+    
+    vals = get_data()
+    html = ""
+    
+    vals.each do |row|
+      row["user_name"] = $usr.get_disp_name(row["user_id"])
+      html += load_template(row, "show_note.html")
+    end
+    
+    return html + "<br />"
+    
+  end
+  
 =begin
   def edit(id)
     

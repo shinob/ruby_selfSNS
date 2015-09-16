@@ -1,21 +1,13 @@
 <form method="post" id="login_form">
   <input type="hidden" name="mode" value="login" />
   <div id="login_message">_%message%_</div>
-  <table>
-    <tr>
-      <th>ユーザー名</th>
-      <td>
-        <input type="text" name="name" style="padding: 5px;"
-          onfocus="document.getElementById('login_message').innerHTML='&nbsp;'" />
-      </td>
-    </tr>
-    <tr>
-      <th>パスワード</th>
-      <td><input type="password" name="pass" style="padding: 5px;" /></td>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
-      <td><input type="submit" value="ログイン" /></td>
-    </tr>
-  </table>
+  <div class="title">ユーザー名</div>
+  <div>
+    <input type="text" name="name" style="padding: 5px;"
+      onfocus="document.getElementById('login_message').innerHTML='&nbsp;'" />
+  </div>
+  <div class="title">パスワード</div>
+  <div><input type="password" name="pass" style="padding: 5px;" /></div>
+  <div><input type="submit" value="ログイン" /></div>
 </form>
+<br />
