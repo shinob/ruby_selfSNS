@@ -194,15 +194,24 @@ input {
 }
 
 .note_bottom {
-	padding: 10px;
-	font-size: 9pt;
-	font-weight: bold;
 	background-color: #EEE;
-	color: #669;
-	
+	padding: 10px;
 	border-left: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
 	border-right: 1px solid #CCC;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+}
+
+.note_bottom div {
+	float: left;
+	font-size: 9pt;
+	font-weight: bold;
+	color: #669;
+	border: 0px solid #F00;
+	line-height: 15pt;
+}
+
+.like {
+	cursor: pointer;
 }

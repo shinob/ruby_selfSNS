@@ -13,10 +13,11 @@ class SelfSNS
     html = ""
     
     if $usr.is_login() then
-      html += make_content()
+      make_content()
     else
       html = $usr.get_login_form()
       menu_space()
+      output(html)
       #@title = "ログイン"
     end
     
@@ -25,8 +26,6 @@ class SelfSNS
         html += "<div>#{key} = #{val}</div>"
       end
     end
-    
-    output(html)
     
   end
   
@@ -41,26 +40,34 @@ class SelfSNS
     html += post_photo_form()
     html += find_form()
     
-    case mode
-    when "post_note"
-      obj.save_text()
-      html += obj.show()
-    when "find"
-      html += obj.find($_POST["word"])
-    else
-      html += obj.show()
-    end
-    
-    #html = $usr.get_logout_form()
-    #html += "<p>ID = #{$usr.get_id()}</p>"
-    
     menu_logout()
     menu_profile()
     menu_reload()
     menu_left()
     
-    return html
-      
+    case mode
+    when "post_note"
+      obj.save_text()
+      html += obj.show()
+      output(html)
+    when "find"
+      html += obj.find($_POST["word"])
+      output(html)
+    when "like"
+      like = Likes.new()
+      like.add()
+      #puts $cgi.header()
+      puts like.count($_POST["note_id"])
+    else
+      html += obj.show()
+      output(html)
+    end
+    
+    #html = $usr.get_logout_form()
+    #html += "<p>ID = #{$usr.get_id()}</p>"
+    
+    #return html
+    
   end
   
   def output(html)

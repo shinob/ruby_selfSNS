@@ -22,6 +22,7 @@ classes = [
   "model.rb",
   "users.rb",
   "notes.rb",
+  "likes.rb",
   "selfsns.rb"
 ]
 

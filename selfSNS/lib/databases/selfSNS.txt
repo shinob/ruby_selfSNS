@@ -7,6 +7,13 @@ CREATE TABLE `notes`(
   comment text
 );
 
+CREATE TABLE `likes` (
+  id integer primary key,
+  post_date date,
+  note_id integer,
+  user_id integer
+);
+
 CREATE TABLE `users`(
   id integer primary key,
   disp_name text,

@@ -15,24 +15,36 @@ function snsLogout() {
 
 }
 
-function getDiv(name) {
-	return document.getElementById(name);
-}
-
 function show_post_note_form() {
-	getDiv("post_note").style.display = "block";
-	getDiv("post_photo").style.display = "none";
-	getDiv("find").style.display = "none";
+	$("post_note").style.display = "block";
+	$("post_photo").style.display = "none";
+	$("find").style.display = "none";
 }
 
 function show_find_form() {
-	getDiv("post_note").style.display = "none";
-	getDiv("post_photo").style.display = "none";
-	getDiv("find").style.display = "block";
+	$("post_note").style.display = "none";
+	$("post_photo").style.display = "none";
+	$("find").style.display = "block";
 }
 
 function hide_form() {
-	getDiv("post_note").style.display = "none";
-	getDiv("post_photo").style.display = "none";
-	getDiv("find").style.display = "none";
+	$("post_note").style.display = "none";
+	$("post_photo").style.display = "none";
+	$("find").style.display = "none";
+}
+
+function post_like(note_id) {
+	//alert(note_id);
+	new Ajax.Request("index.rb", {
+		method: "post",
+		parameters: "mode=like&note_id=" + note_id,
+		onSuccess: function(rs) {
+			//alert($("like" + note_id).innerHTML);
+			//alert(rs.responseText);
+			$("like"+note_id).innerHTML = rs.responseText;
+		},
+		onFailure: function() {
+			$("like"+note_id).innerHTML = "NULL";
+		}
+	});
 }

@@ -25,6 +25,8 @@ class Notes < Model
     
     vals.each do |row|
       row["user_name"] = $usr.get_disp_name(row["user_id"])
+      like = Likes.new()
+      row["likeCount"] = like.count(row["id"]).to_s
       html += load_template(row, "show_note.html")
     end
     
