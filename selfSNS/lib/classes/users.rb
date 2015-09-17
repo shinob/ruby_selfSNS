@@ -201,6 +201,7 @@ EOF
     debug("docUsers.is_login()")
     
     mode = $_POST["mode"].to_s
+    name = $session["user"]
     flg = false
     
     debug("mode = #{mode}")
@@ -214,6 +215,7 @@ EOF
       else
         $session["user"] = login()
       end
+      name = $session["user"]
     end
     
     debug("docUsers.is_login()")
@@ -227,6 +229,10 @@ EOF
     set_auth_type()
     
     debug("flg : #{flg}")
+    
+    f = File.open($currentDir + "login.log", 'a')
+    f << "#{Time.now} [#{name.to_s}] #{mode} #{flg}\n"
+    f.close()
     
     return flg
     

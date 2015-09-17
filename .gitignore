@@ -11,6 +11,7 @@
 /files/
 .DS_Store
 *.db
+*.log
 
 ## Specific to RubyMotion:
 .dat*

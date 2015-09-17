@@ -19,3 +19,20 @@ function getDiv(name) {
 	return document.getElementById(name);
 }
 
+function show_post_note_form() {
+	getDiv("post_note").style.display = "block";
+	getDiv("post_photo").style.display = "none";
+	getDiv("find").style.display = "none";
+}
+
+function show_find_form() {
+	getDiv("post_note").style.display = "none";
+	getDiv("post_photo").style.display = "none";
+	getDiv("find").style.display = "block";
+}
+
+function hide_form() {
+	getDiv("post_note").style.display = "none";
+	getDiv("post_photo").style.display = "none";
+	getDiv("find").style.display = "none";
+}

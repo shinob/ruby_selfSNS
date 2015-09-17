@@ -2,8 +2,8 @@ class SelfSNS
 
   def initialize()
     @style = ""
-    @page_title = "営農 意見交換"
-    @title = "営農 意見交換"
+    @page_title = "sefSNS made by Ruby"
+    @title = "selSNS made by Ruby"
     @foot = "<a href='https://github.com/shinob/ruby_selfSNS' target='_blank'>ruby_selfSNS@GitHub</a>"
     @menu = ""
   end
@@ -37,19 +37,22 @@ class SelfSNS
     
     html = ""
     
+    html += post_note_form()
+    html += post_photo_form()
+    html += find_form()
+    
     case mode
     when "post_note"
       obj.save_text()
+      html += obj.show()
+    when "find"
+      html += obj.find($_POST["word"])
     else
-      
+      html += obj.show()
     end
     
     #html = $usr.get_logout_form()
-    html += post_note_form()
-    html += post_photo_form()
     #html += "<p>ID = #{$usr.get_id()}</p>"
-    
-    html += obj.show()
     
     menu_logout()
     menu_profile()
@@ -106,6 +109,10 @@ EOF
   
   def post_photo_form()
     return load_template({},"post_photo.html")
+  end
+  
+  def find_form()
+    return load_template({},"find_form.html")
   end
   
   

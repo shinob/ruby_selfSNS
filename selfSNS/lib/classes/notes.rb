@@ -32,6 +32,21 @@ class Notes < Model
     
   end
   
+  def find(word)
+    
+    sql = "SELECT * FROM #{@table} WHERE comment LIKE '%#{word}%' ORDER BY id DESC"
+    vals = @db.query(sql)
+    html = ""
+    
+    vals.each do |row|
+      row["user_name"] = $usr.get_disp_name(row["user_id"])
+      html += load_template(row, "show_note.html")
+    end
+    
+    return html + "<br />"
+  
+  end
+  
 =begin
   def edit(id)
     

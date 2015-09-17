@@ -4,6 +4,7 @@
 	margin: 0px;
 	text-decoration: none;
 	color: #000;
+	font-family: sans-serif;
 }
 
 body {
@@ -11,6 +12,10 @@ body {
 }
 
 th, td {
+	padding: 5px;
+}
+
+input {
 	padding: 5px;
 }
 
@@ -55,22 +60,29 @@ th, td {
 	font-weight: bold;
 }
 
-#menu .item-right {
-	float: right;
+#menu div {
 	padding-left: 10px;
 	line-height: 50px;
 	border: 0px solid #F00;
+	font-weight: bold;
+	color: #669;
+	cursor: pointer;
+}
+
+#menu .item-right {
+	float: right;
 }
 
 #menu .item-left {
 	float: left;
-	padding-left: 10px;
-	line-height: 50px;
-	border: 0px solid #F00;
 }
 
 #foot * {
 	color: #AAA;
+}
+
+.close {
+	float: right;
 }
 
 #post_note {
@@ -91,14 +103,11 @@ th, td {
 	font-weight: bold;
 }
 
-#post_note .close {
-	float: right;
-}
-
 #post_note textarea {
 	width: 90%;
 	height: 100px;
 	padding: 5px;
+	margin-top: 5px;
 }
 
 #post_note input {
@@ -120,8 +129,15 @@ th, td {
 	font-weight: bold;
 }
 
-#post_photo .close {
-	float: right;
+#find {
+	display:none;
+	padding: 10px;
+	border: 1px solid #CCC;
+	border-radius: 10px;
+	background-color: #EEE;
+	margin: 10px;
+	position: fixed;
+	width: 80%;
 }
 
 #login_form {
@@ -139,6 +155,7 @@ th, td {
 
 #login_form .title {
 	float: left;
+	width: 80px;
 }
 
 #login_message {
@@ -155,7 +172,7 @@ th, td {
 
 .user_photo {
 	float: left;
-	border: 1px solid #000;
+	border: 1px solid #CCC;
 	width: 40px;
 	height: 40px;
 	margin: 0px 10px 0px 0px;
@@ -164,6 +181,7 @@ th, td {
 .user_name {
 	font-size: 14pt;
 	font-weight: bold;
+	color: #669;
 }
 
 .post_date {
@@ -180,6 +198,7 @@ th, td {
 	font-size: 9pt;
 	font-weight: bold;
 	background-color: #EEE;
+	color: #669;
 	
 	border-left: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
