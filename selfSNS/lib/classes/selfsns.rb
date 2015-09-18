@@ -42,6 +42,7 @@ class SelfSNS
     
     html += post_note_form()
     html += post_photo_form()
+    html += post_comment_form()
     html += find_form()
     
     menu_logout()
@@ -129,6 +130,10 @@ EOF
   
   def post_photo_form()
     return load_template({},"post_photo.html")
+  end
+  
+  def post_comment_form()
+    return load_template({},"post_comment.html")
   end
   
   def find_form()

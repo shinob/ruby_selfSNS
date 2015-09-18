@@ -81,23 +81,10 @@ EOF
   
   def show()
     
-    vals = get_data()
-    html = ""
-    
-    vals.each do |row|
-      row["user_name"] = $usr.get_disp_name(row["user_id"])
-      like = Likes.new()
-      row["likeCount"] = like.count(row["id"]).to_s
-      if row["note_type"] == "text" then
-        html += load_template(row, "show_note.html")
-      else
-        #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
-        row["comment"] = "/?mode=photo&id=#{row["id"]}"
-        html += load_template(row, "show_photo.html")
-      end
-    end
-    
-    return html + "<br />"
+    sql = "SELECT * FROM #{@table} WHERE note_id IS Null ORDER BY id DESC"
+    #vals = get_data()
+    vals = @db.query(sql)
+    return make_show(vals)
     
   end
   
@@ -105,17 +92,75 @@ EOF
     
     sql = "SELECT * FROM #{@table} WHERE comment LIKE '%#{word}%' ORDER BY id DESC"
     vals = @db.query(sql)
-    html = ""
     
-    vals.each do |row|
-      row["user_name"] = $usr.get_disp_name(row["user_id"])
-      html += load_template(row, "show_note.html")
-    end
-    
-    return html + "<br />"
+    return make_show(vals)
   
   end
   
+  def make_show(vals)
+    
+    html = ""
+    
+    ids = []
+    
+    vals.each do |row|
+      
+      flg = true
+      
+      if row["note_id"].to_i > 0 then
+        row = get_data_by_id(row["note_id"])
+      end
+      
+      if ids.include?(row["id"]) then
+        
+      else
+        ids.push(row["id"])
+        
+        row["user_name"] = $usr.get_disp_name(row["user_id"])
+        
+        like = Likes.new()
+        row["likeCount"] = like.count(row["id"]).to_s
+        
+        row["add_comment"] = ""
+        
+        if row["note_type"] == "text" then
+          #html += load_template(row, "show_note.html")
+        else
+          #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
+          row["comment"] = "<img src='/?mode=photo&id=#{row["id"]}' width=100% />"
+          #html += load_template(row, "show_photo.html")
+        end
+        
+        row["add_comment"] += show_comments(row["id"])
+        
+        html += load_template(row, "show_note.html")
+        
+      end
+      
+    end
+    
+    return html + "<br />"
+    
+  end
+  
+  def show_comments(id)
+    
+    sql = "SELECT * FROM #{@table} WHERE note_id = '#{id}'"
+    vals = @db.query(sql)
+    
+    html = ""
+    
+    vals.each do |row|
+      #html += "<div>#{row['comment']}</div>"
+      row["user_name"] = $usr.get_disp_name(row["user_id"])
+      html += load_template(row, "show_comment.html")
+    end
+    
+    return html
+    #return sql
+    
+  end
+    
 =begin
   def edit(id)
     

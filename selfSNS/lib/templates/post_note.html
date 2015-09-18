@@ -1,9 +1,7 @@
 <form method="post" id="post_note" onsubmit="if(this.comment.value == '') { alert('文字を入力して下さい。'); return false; }">
   <input type="hidden" name="mode" value="post_note" />
   <div class="close" onclick="hide_form();">&nbsp;×&nbsp;</div>
-<!--
-  <div class="title">投稿</div>
--->
+  <div class="title">新規投稿</div>
   <textarea name="comment"></textarea><br />
   <input type="submit" value="送信" />
 </form>

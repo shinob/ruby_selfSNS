@@ -4,6 +4,10 @@
 	<div class="post_date">_%post_date%_</div>
 	<div class="comment">_%comment%_</div>
 </div>
+_%add_comment%_
 <div class="note_bottom">
-	<div class="like" onclick="post_like('_%id%_')">いいね(</div><div id="like_%id%_">_%likeCount%_</div><div>) ・コメントする</div> <div style="color: red;">← 開発中</div>&nbsp;
+	<div class="like" onclick="post_like('_%id%_')">いいね(</div>
+	<div id="like_%id%_">_%likeCount%_</div>
+	<div class="like" onClick="show_post_comment_form(_%id%_);">) ・コメントする</div>
+	&nbsp;
 </div>

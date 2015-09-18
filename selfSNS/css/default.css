@@ -132,6 +132,37 @@ input {
 	font-weight: bold;
 }
 
+#post_comment {
+	display: none;
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid #AAA;
+	background-color: #EEE;
+	position: fixed;
+	margin: 10px;
+	width: 80%;
+/*
+	top: 50px;
+	left: 0px;
+	position: absolute;
+*/
+}
+
+#post_comment .title {
+	font-weight: bold;
+}
+
+#post_comment textarea {
+	width: 90%;
+	height: 100px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+#post_comment input {
+	margin-top: 5px;
+}
+
 #find {
 	display:none;
 	padding: 10px;
@@ -171,6 +202,12 @@ input {
 	margin-top: 10px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+}
+
+.show_comment {
+	border: 1px solid #CCC;
+	border-top: 0px;
+	padding: 10px;
 }
 
 .user_photo {

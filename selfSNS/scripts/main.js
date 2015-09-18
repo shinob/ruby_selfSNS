@@ -19,24 +19,36 @@ function show_post_note_form() {
 	$("post_note").style.display = "block";
 	$("post_photo").style.display = "none";
 	$("find").style.display = "none";
+	$("post_comment").style.display = "none";
 }
 
 function show_post_photo_form() {
 	$("post_note").style.display = "none";
 	$("post_photo").style.display = "block";
 	$("find").style.display = "none";
+	$("post_comment").style.display = "none";
 }
 
 function show_find_form() {
 	$("post_note").style.display = "none";
 	$("post_photo").style.display = "none";
 	$("find").style.display = "block";
+	$("post_comment").style.display = "none";
+}
+
+function show_post_comment_form(id) {
+	$("post_note").style.display = "none";
+	$("post_photo").style.display = "none";
+	$("find").style.display = "none";
+	$("post_comment").style.display = "block";
+	$("note_id_for_comment").value = id;
 }
 
 function hide_form() {
 	$("post_note").style.display = "none";
 	$("post_photo").style.display = "none";
 	$("find").style.display = "none";
+	$("post_comment").style.display = "none";
 }
 
 function post_like(note_id) {
