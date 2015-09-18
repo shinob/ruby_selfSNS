@@ -53,7 +53,11 @@ class SelfSNS
     case mode
     when "post_note"
       obj.save_text()
-      html += obj.show()
+      if $_POST["note_id"].to_i > 0 then
+        html += obj.show_by_id($_POST["note_id"])
+      else
+        html += obj.show()
+      end
       output(html)
     when "post_photo"
       obj.save_photo()
@@ -116,7 +120,7 @@ class SelfSNS
   
   def menu_reload()
     @menu += <<EOF
-<div class='item-right' onClick='location.href="/";'>最新に更新</div>
+<div class='item-right' onClick='location.href="/";'>更新</div>
 EOF
   end
   

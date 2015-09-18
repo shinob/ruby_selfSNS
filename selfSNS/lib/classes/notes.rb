@@ -81,7 +81,49 @@ EOF
   
   def show()
     
-    sql = "SELECT * FROM #{@table} WHERE note_id IS Null ORDER BY id DESC"
+    cnt = $_GET["cnt"].to_i
+    limit = 5
+    offset = 0
+    
+    if cnt > 0 then
+      offset = cnt * limit
+    end
+    
+    sql = "SELECT * FROM #{@table} WHERE note_id IS Null ORDER BY id DESC LIMIT #{limit} OFFSET #{offset}"
+    #vals = get_data()
+    vals = @db.query(sql)
+    html = make_show(vals)
+    
+    prv = ""
+    nxt = ""
+    
+    if cnt > 0 then
+      prv = "<a href='/?cnt=#{cnt - 1}' class='nav' style='float:left'>新しい投稿</a>"
+    else
+      prv = ""
+    end
+    
+    if html != "" then
+      nxt = "<a href='/?cnt=#{cnt + 1}' class='nav' style='float: right'>古い投稿</a>"
+    else
+      nxt = ""
+    end
+    
+    if html != "" then
+      html += "#{prv}#{nxt}"
+    end
+    
+    return <<EOF
+#{prv}
+#{nxt}
+#{html}
+EOF
+    
+  end
+  
+  def show_by_id(id)
+    
+    sql = "SELECT * FROM #{@table} WHERE id = '#{id}' ORDER BY id DESC"
     #vals = get_data()
     vals = @db.query(sql)
     return make_show(vals)
@@ -139,7 +181,8 @@ EOF
       
     end
     
-    return html + "<br />"
+    #return html + "<br />";
+    return html;
     
   end
   
@@ -150,10 +193,15 @@ EOF
     
     html = ""
     
+    i = 0
+    color = ["#FAFAFA", "#FFF"]
+    
     vals.each do |row|
+      row["bgcolor"] = color[i % 2]
       #html += "<div>#{row['comment']}</div>"
       row["user_name"] = $usr.get_disp_name(row["user_id"])
       html += load_template(row, "show_comment.html")
+      i += 1
     end
     
     return html

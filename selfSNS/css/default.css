@@ -43,9 +43,12 @@ input {
 }
 
 #foot {
+	clear: both;
 	border-top: 1px solid #CCC;
 	text-align: center;
 	line-height: 50px;
+	margin-top: 10px;
+	background-color: #AAA;
 }
 
 .inner {
@@ -78,22 +81,18 @@ input {
 }
 
 #foot * {
-	color: #AAA;
+	color: #FFF;
+	font-weight: bold;
 }
 
-.close {
-	float: right;
-	cursor: pointer;
-}
-
-#post_note {
+.post_form {
 	display: none;
 	padding: 10px;
 	border-radius: 10px;
-	border: 1px solid #AAA;
+	border: 2px solid #669;
 	background-color: #EEE;
 	position: fixed;
-	margin: 10px;
+	margin: 5px;
 	width: 80%;
 /*
 	top: 50px;
@@ -102,8 +101,17 @@ input {
 */
 }
 
-#post_note .title {
+.post_close {
+	float: right;
+	cursor: pointer;
+}
+
+.post_title {
 	font-weight: bold;
+	color: #669;
+}
+
+#post_note {
 }
 
 #post_note textarea {
@@ -118,38 +126,9 @@ input {
 }
 
 #post_photo {
-	display: none;
-	padding: 10px;
-	border: 1px solid #CCC;
-	border-radius: 10px;
-	background-color: #EEE;
-	margin: 10px;
-	position: fixed;
-	width: 80%;
-}
-
-#post_photo .title {
-	font-weight: bold;
 }
 
 #post_comment {
-	display: none;
-	padding: 10px;
-	border-radius: 10px;
-	border: 1px solid #AAA;
-	background-color: #EEE;
-	position: fixed;
-	margin: 10px;
-	width: 80%;
-/*
-	top: 50px;
-	left: 0px;
-	position: absolute;
-*/
-}
-
-#post_comment .title {
-	font-weight: bold;
 }
 
 #post_comment textarea {
@@ -164,17 +143,10 @@ input {
 }
 
 #find {
-	display:none;
-	padding: 10px;
-	border: 1px solid #CCC;
-	border-radius: 10px;
-	background-color: #EEE;
-	margin: 10px;
-	position: fixed;
-	width: 80%;
 }
 
 #login_form {
+	width: 50%;
 	margin: 0px auto;
 	border: 0px solid #F00;
 }
@@ -188,15 +160,20 @@ input {
 }
 
 #login_form .title {
+	font-weight: bold;
 	float: left;
 	width: 80px;
+	color: #669;
 }
 
 #login_message {
-	line-height: 40px;
+	height: 50px;
+	padding-top: 10px;
+	border: 0px solid #000;
 }
 
 .show_note {
+	clear: both;
 	border: 1px solid #CCC;
 	padding: 10px;
 	margin-top: 10px;
@@ -213,6 +190,7 @@ input {
 .user_photo {
 	float: left;
 	border: 1px solid #CCC;
+	background-color: #FFF;
 	width: 40px;
 	height: 40px;
 	margin: 0px 10px 0px 0px;
@@ -234,7 +212,7 @@ input {
 }
 
 .note_bottom {
-	background-color: #EEE;
+	background-color: #EAEAEA;
 	padding: 10px;
 	border-left: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
@@ -254,4 +232,22 @@ input {
 
 .like {
 	cursor: pointer;
+}
+
+a.nav {
+	float: left;
+	font-weight: bold;
+	padding:10px;
+	margin: 10px 0px;
+	width: 44%;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	background-color: #EEE;
+	text-align: center;
+	display:block;
+	color: #669;
+}
+
+a:hover.nav {
+	background-color: #FFF;
 }

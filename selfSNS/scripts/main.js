@@ -1,3 +1,29 @@
+var cnt = 0;
+var flg_add = true;
+
+window.onscroll = function(e)
+{
+	scrollTop = document.body.scrollTop + document.documentElement.clientHeight;
+	height = document.body.getBoundingClientRect().height;
+	//$("foot").innerHTML = scrollTop + "px / " + height + "px";
+	if (scrollTop > height) {
+		//addElement();
+		//alert("load new pages");
+	}
+	//$("foot").innerHTML = scrollTop + "px / " + height + "px";
+	//alert(this.scrollTop);
+};
+
+function addElement() {
+	var element = document.createElement('div');
+	element.className = "inner";
+	cnt += 1;
+	element.innerHTML = "<div class='show_note'>追加" + cnt + "</div>";
+	
+	var obj = $('cont');
+	obj.appendChild(element);
+}
+
 function snsLogout() {
 	
 	var form = document.createElement('form');
