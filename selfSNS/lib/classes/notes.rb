@@ -1,8 +1,42 @@
 class Notes < Model
   
   def initialize()
+    
     set_value($db, "notes")
     @type = "notes"
+    
+    @name = "filename"
+    @dir = Dir.getwd + "/files/"
+    
+  end
+  
+  def get_file_dir(id)
+    return @dir + sprintf("%010d",id.to_i)
+  end
+  
+  def get_file_link_dir(id)
+    return "files/" + sprintf("%010d/", id.to_i)
+  end
+  
+  def load_file(id)
+    
+    vals = get_data_by_id(id)
+    filename = get_file_dir(id) + "/" + vals["comment"]
+    
+    #puts vals["comment"]
+    #puts get_content_type(vals["comment"])
+    
+    puts <<EOF
+Content-type: #{get_content_type(vals["comment"])}
+Content-Disposition: attachment; filename="#{vals['comment']}"
+
+EOF
+    #puts $cgi.header(get_content_type(vals["comment"]))
+    
+    f = File.open(filename, "r+b")
+    puts f.read
+    f.close
+    
   end
   
   def save_text()
@@ -18,6 +52,33 @@ class Notes < Model
     
   end
   
+  def save_photo()
+    
+    data = $cgi.params[@name][0]
+    dir, filename =  File::split(data.original_filename.force_encoding("utf-8").gsub("\\","/"))
+    
+    t = Time.now
+    
+    $_POST["id"] = 0
+    $_POST["user_id"] = $usr.get_id()
+    $_POST["note_type"] = "photo"
+    $_POST["post_date"] = t.strftime("%Y-%m-%d %H:%M:%S")
+    $_POST["comment"] = filename
+    
+    id = apply($_POST)
+    
+    file_dir = get_file_dir(id)
+    FileUtils.mkdir_p(file_dir) unless FileTest.exist?(file_dir)
+    
+    open(file_dir + "/" + filename, "w") do |fh|
+      fh.binmode
+      fh.write data.read
+    end
+    
+    return id
+    
+  end
+  
   def show()
     
     vals = get_data()
@@ -27,7 +88,13 @@ class Notes < Model
       row["user_name"] = $usr.get_disp_name(row["user_id"])
       like = Likes.new()
       row["likeCount"] = like.count(row["id"]).to_s
-      html += load_template(row, "show_note.html")
+      if row["note_type"] == "text" then
+        html += load_template(row, "show_note.html")
+      else
+        #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
+        row["comment"] = "/?mode=photo&id=#{row["id"]}"
+        html += load_template(row, "show_photo.html")
+      end
     end
     
     return html + "<br />"

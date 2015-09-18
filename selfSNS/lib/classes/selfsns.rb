@@ -32,6 +32,10 @@ class SelfSNS
   def make_content()
     
     mode = $_POST["mode"]
+    if mode == "" then
+      mode = $_GET["mode"]
+    end
+    
     obj = Notes.new()
     
     html = ""
@@ -50,14 +54,21 @@ class SelfSNS
       obj.save_text()
       html += obj.show()
       output(html)
+    when "post_photo"
+      obj.save_photo()
+      html += obj.show()
+      output(html)
     when "find"
       html += obj.find($_POST["word"])
       output(html)
     when "like"
       like = Likes.new()
       like.add()
-      #puts $cgi.header()
+      puts $cgi.header()
       puts like.count($_POST["note_id"])
+    when "photo"
+      #puts $cgi.header()
+      obj.load_file($_GET["id"])
     else
       html += obj.show()
       output(html)
@@ -84,6 +95,8 @@ class SelfSNS
     }
     
     html = load_template(wk, "page.html")
+    
+    puts $cgi.header()
     puts html
     
   end

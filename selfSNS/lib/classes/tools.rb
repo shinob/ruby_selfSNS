@@ -14,6 +14,27 @@ def get_dir()
   
 end
 
+def get_content_type(filename)
+  
+  ext = File.extname(filename.downcase)
+  #puts ext
+  type = ""
+  
+  case ext
+  when ".jpg", ".jpeg"
+    type = "image/jpeg"
+  when ".png"
+    type = "image/png"
+  when ".gif"
+    type = "image/gif"
+  else
+    type = "text/html"
+  end
+  
+  return type
+  
+end
+
 def load_template(values, filename)
   
   dir = $templateDir

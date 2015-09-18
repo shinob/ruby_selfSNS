@@ -7,7 +7,7 @@ require 'sqlite3'
 $cgi = CGI.new()
 $session = CGI::Session.new($cgi)
 
-puts $cgi.header()
+#puts $cgi.header()
 
 $currentDir = Dir.getwd + "/lib/"
 
