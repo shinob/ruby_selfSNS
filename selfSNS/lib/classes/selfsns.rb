@@ -44,6 +44,7 @@ class SelfSNS
     html += post_photo_form()
     html += post_comment_form()
     html += find_form()
+    html += set_photo_form()
     
     menu_logout()
     menu_profile()
@@ -61,8 +62,11 @@ class SelfSNS
       output(html)
     when "post_photo"
       obj.save_photo()
-      html += obj.show()
-      output(html)
+      output(obj.show())
+    when "set_photo"
+      prof = Profiles.new()
+      prof.set("photo", $_POST["set_photo_id"])
+      output(obj.show())
     when "find"
       html += obj.find($_POST["word"])
       output(html)
@@ -86,6 +90,17 @@ class SelfSNS
     
   end
   
+  def add_log()
+    
+    name = $session["user"]
+    mode = $_POST["mode"].to_s
+    
+    f = File.open($currentDir + "login.log", 'a')
+    f << "#{Time.now} [#{name.to_s}] #{mode}\n"
+    f.close()
+    
+  end
+  
   def output(html)
     
     #menu = "トップ"
@@ -103,6 +118,8 @@ class SelfSNS
     
     puts $cgi.header()
     puts html
+    
+    add_log()
     
   end
   
@@ -142,6 +159,10 @@ EOF
   
   def find_form()
     return load_template({},"find_form.html")
+  end
+  
+  def set_photo_form()
+    return load_template({},"set_photo.html")
   end
   
   

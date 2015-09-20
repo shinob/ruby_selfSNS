@@ -23,6 +23,7 @@ classes = [
   "users.rb",
   "notes.rb",
   "likes.rb",
+  "profiles.rb",
   "selfsns.rb"
 ]
 

@@ -8,6 +8,8 @@ class Notes < Model
     @name = "filename"
     @dir = Dir.getwd + "/files/"
     
+    @prof = Profiles.new()
+    
   end
   
   def get_file_dir(id)
@@ -159,6 +161,7 @@ EOF
         ids.push(row["id"])
         
         row["user_name"] = $usr.get_disp_name(row["user_id"])
+        row["user_photo"] = get_user_photo(row["user_id"])
         
         like = Likes.new()
         row["likeCount"] = like.count(row["id"]).to_s
@@ -169,7 +172,7 @@ EOF
           #html += load_template(row, "show_note.html")
         else
           #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
-          row["comment"] = "<img src='/?mode=photo&id=#{row["id"]}' width=100% />"
+          row["comment"] = "<img src='/?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})' />"
           #html += load_template(row, "show_photo.html")
         end
         
@@ -200,6 +203,8 @@ EOF
       row["bgcolor"] = color[i % 2]
       #html += "<div>#{row['comment']}</div>"
       row["user_name"] = $usr.get_disp_name(row["user_id"])
+      row["user_photo"] = get_user_photo(row["user_id"])
+      
       html += load_template(row, "show_comment.html")
       i += 1
     end
@@ -208,7 +213,13 @@ EOF
     #return sql
     
   end
+  
+  def get_user_photo(user_id)
     
+    img = "<img src='/?mode=photo&id=#{@prof.get(user_id, "photo")}' />"
+    return img
+  end
+  
 =begin
   def edit(id)
     

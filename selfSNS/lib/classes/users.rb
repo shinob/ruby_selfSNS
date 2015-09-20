@@ -230,10 +230,6 @@ EOF
     
     debug("flg : #{flg}")
     
-    f = File.open($currentDir + "login.log", 'a')
-    f << "#{Time.now} [#{name.to_s}] #{mode} #{flg}\n"
-    f.close()
-    
     return flg
     
   end

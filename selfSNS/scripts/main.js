@@ -42,32 +42,33 @@ function snsLogout() {
 }
 
 function show_post_note_form() {
+	hide_form();
 	$("post_note").style.display = "block";
-	$("post_photo").style.display = "none";
-	$("find").style.display = "none";
-	$("post_comment").style.display = "none";
 }
 
 function show_post_photo_form() {
-	$("post_note").style.display = "none";
+	hide_form();
 	$("post_photo").style.display = "block";
-	$("find").style.display = "none";
-	$("post_comment").style.display = "none";
 }
 
 function show_find_form() {
-	$("post_note").style.display = "none";
-	$("post_photo").style.display = "none";
+	hide_form();
 	$("find").style.display = "block";
-	$("post_comment").style.display = "none";
 }
 
 function show_post_comment_form(id) {
-	$("post_note").style.display = "none";
-	$("post_photo").style.display = "none";
-	$("find").style.display = "none";
+	hide_form();
 	$("post_comment").style.display = "block";
+	
 	$("note_id_for_comment").value = id;
+}
+
+function show_set_photo_form(id) {
+	hide_form();
+	$("set_photo").style.display = "block";
+	
+	$("set_photo_img").src = "/?mode=photo&id=" + id;
+	$("set_photo_id").value = id;
 }
 
 function hide_form() {
@@ -75,6 +76,7 @@ function hide_form() {
 	$("post_photo").style.display = "none";
 	$("find").style.display = "none";
 	$("post_comment").style.display = "none";
+	$("set_photo").style.display = "none";
 }
 
 function post_like(note_id) {
