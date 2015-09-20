@@ -20,7 +20,7 @@ class Profiles < Model
   
   def get(user_id, title)
     
-    user_id = $usr.get_id()
+    #user_id = $usr.get_id()
     sql = "SELECT * FROM #{@table} WHERE user_id = '#{user_id}' AND title = '#{title}'"
     vals = @db.query(sql)
     
