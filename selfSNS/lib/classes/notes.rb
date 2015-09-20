@@ -170,6 +170,7 @@ EOF
         
         if row["note_type"] == "text" then
           #html += load_template(row, "show_note.html")
+          row["comment"].gsub!("\n", "<br />")
         else
           #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
           row["comment"] = "<img src='/?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})' />"
@@ -204,6 +205,7 @@ EOF
       #html += "<div>#{row['comment']}</div>"
       row["user_name"] = $usr.get_disp_name(row["user_id"])
       row["user_photo"] = get_user_photo(row["user_id"])
+      row["comment"].gsub!("\n", "<br />")
       
       html += load_template(row, "show_comment.html")
       i += 1
