@@ -62,11 +62,13 @@ class SelfSNS
       output(html)
     when "post_photo"
       obj.save_photo()
-      output(obj.show())
+      html += obj.show()
+      output(html)
     when "set_photo"
       prof = Profiles.new()
       prof.set("photo", $_POST["set_photo_id"])
-      output(obj.show())
+      html += obj.show()
+      output(html)
     when "find"
       html += obj.find($_POST["word"])
       output(html)
