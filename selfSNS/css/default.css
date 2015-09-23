@@ -179,6 +179,11 @@ input {
 	border: 0px solid #000;
 }
 
+.info {
+	margin-top: 10px;
+	color: #F00;
+}
+
 .show_note {
 	clear: both;
 	border: 1px solid #CCC;
@@ -192,6 +197,38 @@ input {
 	border: 1px solid #CCC;
 	border-top: 0px;
 	padding: 10px;
+}
+
+.show_profile {
+	clear: both;
+	border: 1px solid #CCC;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	height: 350px;
+}
+
+.show_profile .items {
+	padding-top: 10px;
+	clear: both;
+}
+
+.show_profile .items div {
+	border: 0px solid #F00;
+	line-height: 28px;
+}
+
+.show_profile .items .title {
+	font-weight: bold;
+	float: left;
+	width: 80px;
+	color: #669;
+	clear: both;
+}
+
+.show_profile .items .value input {
+	width: 80%;
+	line-height: 100%;
 }
 
 .user_photo {

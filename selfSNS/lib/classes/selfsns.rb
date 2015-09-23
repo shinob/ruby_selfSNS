@@ -51,6 +51,8 @@ class SelfSNS
     menu_reload()
     menu_left()
     
+    #puts $cgi.header()
+    
     case mode
     when "post_note"
       obj.save_text()
@@ -80,6 +82,21 @@ class SelfSNS
     when "photo"
       #puts $cgi.header()
       obj.load_file($_GET["id"])
+    when "profile"
+      #puts $cgi.header()
+      html += obj.show_profile($_GET["id"])
+      output(html)
+    when "post_profile"
+      prof = Profiles.new()
+      prof.update_values($_POST)
+      html += "<div class='info'>プロフィールを更新しました。</div>"
+      #html += "<p>"
+      #$_POST.each do |key, val|
+      #  html += "<p>#{key} / #{val}</p>"
+      #end
+      #html += "</p>"
+      html += obj.show_profile($_GET["id"])
+      output(html)
     else
       html += obj.show()
       output(html)

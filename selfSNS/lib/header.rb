@@ -32,6 +32,9 @@ classes.each do |c|
 end
 
 $flg_debug = false
+if $flg_debug then
+  puts $cgi.header()
+end
 
 debug("USER : " + $session["user"].to_s)
 
