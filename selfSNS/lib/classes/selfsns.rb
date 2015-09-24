@@ -6,6 +6,7 @@ class SelfSNS
     @title = "selSNS made by Ruby"
     @foot = "<a href='https://github.com/shinob/ruby_selfSNS' target='_blank'>ruby_selfSNS@GitHub</a>"
     @menu = ""
+    @url = ENV['REQUEST_URI'][0..ENV['REQUEST_URI'].rindex("/")]
   end
   
   def main()
@@ -123,6 +124,7 @@ class SelfSNS
   def output(html)
     
     #menu = "トップ"
+    #html += "<div>#{@url}12345</div>"
     
     wk = {
       "style" => @style,
@@ -156,7 +158,7 @@ class SelfSNS
   
   def menu_reload()
     @menu += <<EOF
-<div class='item-right' onClick='location.href="/";'>更新</div>
+<div class='item-right' onClick='location.href="#{@url}";'>更新</div>
 EOF
   end
   

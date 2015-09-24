@@ -9,6 +9,7 @@ class Notes < Model
     @dir = Dir.getwd + "/files/"
     
     @prof = Profiles.new()
+    @url = ENV['REQUEST_URI'][0..ENV['REQUEST_URI'].rindex("/")]
     
   end
   
@@ -100,13 +101,13 @@ EOF
     nxt = ""
     
     if cnt > 0 then
-      prv = "<a href='/?cnt=#{cnt - 1}' class='nav' style='float:left'>新しい投稿</a>"
+      prv = "<a href='#{@url}?cnt=#{cnt - 1}' class='nav' style='float:left'>新しい投稿</a>"
     else
       prv = ""
     end
     
     if html != "" then
-      nxt = "<a href='/?cnt=#{cnt + 1}' class='nav' style='float: right'>古い投稿</a>"
+      nxt = "<a href='#{@url}?cnt=#{cnt + 1}' class='nav' style='float: right'>古い投稿</a>"
     else
       nxt = ""
     end
@@ -114,6 +115,8 @@ EOF
     if html != "" then
       html += "#{prv}#{nxt}"
     end
+    
+    #html += "<div>#{@url}456</div>"
     
     return <<EOF
 #{prv}
@@ -161,7 +164,7 @@ EOF
         ids.push(row["id"])
         
         row["user_name"] = $usr.get_disp_name(row["user_id"])
-        row["user_name"] = "<a href='/?mode=profile&id=#{row["user_id"]}' class='user_name'>#{row["user_name"]}</a>"
+        row["user_name"] = "<a href='#{@url}?mode=profile&id=#{row["user_id"]}' class='user_name'>#{row["user_name"]}</a>"
         row["user_photo"] = get_user_photo(row["user_id"])
         
         like = Likes.new()
@@ -174,7 +177,7 @@ EOF
           row["comment"].gsub!("\n", "<br />")
         else
           #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
-          row["comment"] = "<img src='/?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})' />"
+          row["comment"] = "<img src='#{@url}?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})' />"
           #html += load_template(row, "show_photo.html")
         end
         
@@ -205,6 +208,7 @@ EOF
       row["bgcolor"] = color[i % 2]
       #html += "<div>#{row['comment']}</div>"
       row["user_name"] = $usr.get_disp_name(row["user_id"])
+      row["user_name"] = "<a href='#{@url}?mode=profile&id=#{row["user_id"]}' class='user_name'>#{row["user_name"]}</a>"
       row["user_photo"] = get_user_photo(row["user_id"])
       row["comment"].gsub!("\n", "<br />")
       
@@ -222,7 +226,7 @@ EOF
     id = @prof.get(user_id, "photo")
     
 	    if id.to_i > 0 then
-      img = "<img src='/?mode=photo&id=#{id}' />"
+      img = "<img src='#{@url}?mode=photo&id=#{id}' />"
     else
       img = "&nbsp;"
     end
