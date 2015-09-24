@@ -67,7 +67,7 @@ function show_set_photo_form(id) {
 	hide_form();
 	$("set_photo").style.display = "block";
 	
-	$("set_photo_img").src = "/?mode=photo&id=" + id;
+	$("set_photo_img").src = "index.rb?mode=photo&id=" + id;
 	$("set_photo_id").value = id;
 }
 

@@ -137,10 +137,18 @@ EOF
   
   def find(word)
     
-    sql = "SELECT * FROM #{@table} WHERE comment LIKE '%#{word}%' ORDER BY id DESC"
+    sql = "SELECT * FROM #{@table} WHERE comment LIKE '%#{word}%' OR tag LIKE '%#{word}%' ORDER BY id DESC"
     vals = @db.query(sql)
     
-    return make_show(vals)
+    html = ""
+    
+    if vals.length > 0 then
+      html += make_show(vals)
+    else
+      html += "<div class='info' style='height: 350px;'>一致する検索結果がありませんでした。</div>"
+    end
+    
+    return html
   
   end
   
