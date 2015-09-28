@@ -1,4 +1,4 @@
-<form method="post" id="post_photo" class="post_form" enctype="multipart/form-data">
+<form method="post" id="post_photo" class="post_form" enctype="multipart/form-data" onsubmit="return check_post_photo($('post_photo'));">
   <input type="hidden" name="mode" value="post_photo" />
   <div class="post_close" onclick="hide_form();">&nbsp;×&nbsp;</div>
   <div class="post_title">写真追加</div>

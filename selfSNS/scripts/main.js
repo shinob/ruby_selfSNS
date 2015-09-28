@@ -94,3 +94,46 @@ function post_like(note_id) {
 		}
 	});
 }
+
+function check_post_note(frm) {
+	
+	var msg = "";
+	var flg = false;
+	
+	if(frm.comment.value == "") {
+		msg = "投稿する文字を入力してください。";
+	} else if(frm.tag.value == "") {
+		msg = "分類情報を入力してください。";
+	}
+	
+	if(msg!="") {
+		alert(msg);
+	} else {
+		flg = true;
+	}
+	
+	return flg;
+	
+}
+
+function check_post_photo(frm) {
+	
+	var msg = "";
+	var flg = false;
+	
+	if(frm.filename.value == "") {
+		msg = "投稿する写真を選択してください。";
+	} else if(frm.tag.value == "") {
+		msg = "分類情報を入力してください。";
+	}
+	
+	if(msg!="") {
+		alert(msg);
+	} else {
+		flg = true;
+	}
+	
+	return flg;
+	
+}
+

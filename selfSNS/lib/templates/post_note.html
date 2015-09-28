@@ -1,4 +1,4 @@
-<form method="post" id="post_note" class="post_form" onsubmit="if(this.comment.value == '') { alert('文字を入力して下さい。'); return false; }">
+<form method="post" id="post_note" class="post_form" onsubmit="return check_post_note(this);">
   <input type="hidden" name="mode" value="post_note" />
   <div class="post_close" onclick="hide_form();">&nbsp;×&nbsp;</div>
   <div class="post_title">新規投稿</div>
