@@ -12,6 +12,7 @@ sqlite3 ${libdir}/databases/${appname}.db < ${libdir}/databases/${appname}.txt
 
 mkdir ${appname}/files
 chown apache ${appname}/files
+cp ${appname}/lib/.htaccess ${appname}/files/
 
 # Root権限がない場合
 # chmod 777 ${appname}/files
