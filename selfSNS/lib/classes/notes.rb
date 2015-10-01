@@ -37,7 +37,9 @@ EOF
     #puts $cgi.header(get_content_type(vals["comment"]))
     
     f = File.open(filename, "r+b")
-    puts f.read
+    #puts f.read
+    img = Magick::Image.from_blob(f.read).shift
+    puts img.auto_orient.to_blob
     f.close
     
   end
@@ -76,6 +78,9 @@ EOF
     open(file_dir + "/" + filename, "w") do |fh|
       fh.binmode
       fh.write data.read
+      
+      #img = Magick::Image.from_blob(data.read).shift
+      #fh.write img.auto_orient.to_blob
     end
     
     return id
@@ -184,8 +189,12 @@ EOF
           #html += load_template(row, "show_note.html")
           row["comment"].gsub!("\n", "<br />")
         else
-          #row["comment"] = get_file_link_dir(row["id"]) + row["comment"]
-          row["comment"] = "<img src='#{@url}?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})' />"
+          #filename = get_file_link_dir(row["id"]) + row["comment"]
+          #deg = get_image_orientation(filename)
+          #row["comment"] = "<img src='#{get_file_link_dir(row["id"]) + row["comment"]}' width=100% />"
+          row["comment"] = "<img src='#{@url}?mode=photo&id=#{row["id"]}' width=100% onClick='show_set_photo_form(#{row["id"]})'/>"
+          #row["comment"] += filename
+          #row["comment"] += get_image_orientation(filename).to_s
           #html += load_template(row, "show_photo.html")
         end
         
@@ -233,7 +242,7 @@ EOF
     
     id = @prof.get(user_id, "photo")
     
-	    if id.to_i > 0 then
+    if id.to_i > 0 then
       img = "<img src='#{@url}?mode=photo&id=#{id}' />"
     else
       img = "&nbsp;"

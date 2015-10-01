@@ -14,6 +14,12 @@ If you don't installed gem for SQLite3, you need step below.
 
 sudo gem install sqlite3
 
+And RMagick also...
+
+sudo yum install libjpeg-devel
+sudo yum install ImageMagick ImageMagick-devel
+sudo gem install rmagick
+
 ## How to startup
 
 cd [your directory name]

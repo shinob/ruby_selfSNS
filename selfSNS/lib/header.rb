@@ -3,6 +3,8 @@
 require 'cgi'
 require 'cgi/session'
 require 'sqlite3'
+require 'exifr'
+require 'RMagick'
 
 $cgi = CGI.new()
 $session = CGI::Session.new($cgi)

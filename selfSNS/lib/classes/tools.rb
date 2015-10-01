@@ -35,6 +35,27 @@ def get_content_type(filename)
   
 end
 
+def get_image_orientation(filename)
+  
+  deg = 0
+  
+  if File.extname(filename.downcase) == ".jpg" then
+    
+    exif = EXIFR::JPEG.new(filename).exif
+    
+    if exif[:orientation] == EXIFR::TIFF::RightTopOrientation then
+      deg = 90
+    elsif exif[:orientation] == EXIFR::TIFF::LeftBottomOrientation then
+      deg = -90
+    end
+    
+  end
+  
+  #return Dir.pwd() + filename
+  return deg
+  
+end
+
 def load_template(values, filename)
   
   dir = $templateDir
