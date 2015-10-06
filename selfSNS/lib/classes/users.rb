@@ -3,6 +3,7 @@ class Users < Model
   def initialize()
     set_value($db, "users")
     @message = "&nbsp;"
+    @num = Date.today.day.to_s
     debug("Users")
   end
   
@@ -239,13 +240,18 @@ EOF
     name = $_POST["name"]
     pass = $_POST["pass"]
     
-    sql = "SELECT * FROM #{@table} WHERE name = '#{name}' AND password = '#{pass}'"
-    #sql = "SELECT * FROM docusers WHERE name = '#{name}'"
+    #sql = "SELECT * FROM #{@table} WHERE name = '#{name}' AND password = '#{pass}'"
+    sql = "SELECT * FROM #{@table} WHERE name = '#{name}'"
     tmp = @db.query(sql)
     
     if tmp.length == 0 then
       name = ""
       @message = "ユーザー名またはパスワードが間違っています"
+    else
+      if pass != Digest::MD5.hexdigest(tmp[0]["password"] + @num) then
+        name = ""
+        @message = "ユーザー名またはパスワードが間違っています"
+	  end
     end
     
     debug("docUsers : login() : #{name}")
@@ -287,7 +293,12 @@ EOF
   
   def get_login_form()
     
-    return load_template({"message" => @message}, "login.html")
+    vals = {}
+    
+    vals["num"] = @num
+    vals["message"] = @message
+    
+    return load_template(vals, "login.html")
     
   end
   

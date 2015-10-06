@@ -83,6 +83,9 @@ class SelfSNS
     when "photo"
       #puts $cgi.header()
       obj.load_file($_GET["id"])
+    when "user_photo"
+      #puts $cgi.header()
+      obj.load_user_photo($_GET["id"])
     when "profile"
       #puts $cgi.header()
       html += obj.show_profile($_GET["id"])

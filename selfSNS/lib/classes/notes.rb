@@ -44,6 +44,29 @@ EOF
     
   end
   
+  def load_user_photo(id)
+    
+    vals = get_data_by_id(id)
+    filename = get_file_dir(id) + "/" + vals["comment"]
+    
+    #puts vals["comment"]
+    #puts get_content_type(vals["comment"])
+    
+    puts <<EOF
+Content-type: #{get_content_type(vals["comment"])}
+Content-Disposition: attachment; filename="#{vals['comment']}"
+
+EOF
+    #puts $cgi.header(get_content_type(vals["comment"]))
+    
+    f = File.open(filename, "r+b")
+    #puts f.read
+    img = Magick::Image.from_blob(f.read).shift
+    puts img.auto_orient.resize_to_fill(300,300).to_blob
+    f.close
+    
+  end
+  
   def save_text()
     
     t = Time.now
@@ -243,7 +266,8 @@ EOF
     id = @prof.get(user_id, "photo")
     
     if id.to_i > 0 then
-      img = "<img src='#{@url}?mode=photo&id=#{id}' />"
+      #img = "<img src='#{@url}?mode=photo&id=#{id}' />"
+      img = "<img src='#{@url}?mode=user_photo&id=#{id}' />"
     else
       img = "&nbsp;"
     end

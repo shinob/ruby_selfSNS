@@ -1,5 +1,6 @@
-<form method="post" id="login_form">
+<form method="post" id="login_form" onsubmit="return make_login_key(this);">
   <input type="hidden" name="mode" value="login" />
+  <input type="hidden" name="num" value="_%num%_" />
   <div id="login_message">_%message%_</div>
   <div class="title">ユーザー名</div>
   <div>

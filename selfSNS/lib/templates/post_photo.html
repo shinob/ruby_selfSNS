@@ -1,11 +1,10 @@
 <form method="post" id="post_photo" class="post_form" enctype="multipart/form-data" onsubmit="return check_post_photo($('post_photo'));">
   <input type="hidden" name="mode" value="post_photo" />
   <div class="post_close" onclick="hide_form();">&nbsp;×&nbsp;</div>
-  <div class="post_title">写真追加</div>
+  <div class="post_title">写真投稿</div>
   <input type="file" name="filename" /> <!-- multiple -->
-  <div>
-    分類情報 <input type="text" name="tag" value="" />
-    <input type="submit" value="送信" />
-  </div>
+  <div>分類情報</div>
+  <input type="text" name="tag" value="" /><br />
+  <input type="submit" value="送信" />
   <div>* アップロードできる画像は「jpg」「png」「gif」です。</div>
 </form>

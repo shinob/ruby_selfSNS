@@ -1,8 +1,9 @@
 <form method="post" id="post_note" class="post_form" onsubmit="return check_post_note(this);">
   <input type="hidden" name="mode" value="post_note" />
   <div class="post_close" onclick="hide_form();">&nbsp;×&nbsp;</div>
-  <div class="post_title">新規投稿</div>
+  <div class="post_title">文章投稿</div>
   <textarea name="comment"></textarea><br />
-  分類情報 <input type="text" name="tag" value="" />
+  <div>分類情報</div>
+  <input type="text" name="tag" value="" /><br />
   <input type="submit" value="送信" />
 </form>

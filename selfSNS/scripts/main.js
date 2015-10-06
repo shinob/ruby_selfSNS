@@ -1,6 +1,7 @@
 var cnt = 0;
 var flg_add = true;
 
+/*
 window.onscroll = function(e)
 {
 	scrollTop = document.body.scrollTop + document.documentElement.clientHeight;
@@ -23,6 +24,7 @@ function addElement() {
 	var obj = $('cont');
 	obj.appendChild(element);
 }
+*/
 
 function snsLogout() {
 	
@@ -67,7 +69,7 @@ function show_set_photo_form(id) {
 	hide_form();
 	$("set_photo").style.display = "block";
 	
-	$("set_photo_img").src = "index.rb?mode=photo&id=" + id;
+	$("set_photo_img").src = "index.rb?mode=user_photo&id=" + id;
 	$("set_photo_id").value = id;
 }
 
@@ -137,3 +139,12 @@ function check_post_photo(frm) {
 	
 }
 
+function make_login_key(frm) {
+	
+	var seed = frm.pass.value + frm.num.value
+	frm.pass.value = CybozuLabs.MD5.calc(seed);
+	//alert(frm.pass.value);
+	
+	return true;
+	
+}
