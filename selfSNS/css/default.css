@@ -145,6 +145,14 @@ input {
 #find {
 }
 
+#select_tag a {
+	display: block;
+}
+
+#select_tag a:hover {
+	color: red;
+}
+
 #set_photo img {
 	margin: 10px 0px;
 	width: 150px;
@@ -305,4 +313,22 @@ a.nav {
 
 a:hover.nav {
 	background-color: #FFF;
+}
+
+.tag_list {
+	margin: 10px 0px;
+/*
+	border-radius: 10px;
+	border: 0px solid #669;
+*/
+}
+
+.tag_list a {
+	display: block;
+	padding: 10px;
+	border-bottom: 1px solid #CCC;
+}
+
+.tag_list a:hover {
+	background-color: #EEE;
 }

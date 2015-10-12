@@ -76,6 +76,8 @@ EOF
     $_POST["note_type"] = "text"
     $_POST["post_date"] = t.strftime("%Y-%m-%d %H:%M:%S")
     
+    $_POST["tag"] = $_POST["tag"].gsub("　"," ")
+    
     return apply($_POST)
     
   end
@@ -92,6 +94,8 @@ EOF
     $_POST["note_type"] = "photo"
     $_POST["post_date"] = t.strftime("%Y-%m-%d %H:%M:%S")
     $_POST["comment"] = filename
+    
+    $_POST["tag"] = $_POST["tag"].gsub("　"," ")
     
     id = apply($_POST)
     
@@ -177,6 +181,92 @@ EOF
     end
     
     return html
+  
+  end
+  
+  def tag(word)
+    
+    html = ""
+    
+    if word.to_s == "" then
+      html += tag_list_all()
+    else
+      html += tag_filter(word)
+    end
+    
+    return html
+    
+  end
+  
+  def tag_filter(word)
+    
+    sql = "SELECT * FROM #{@table} WHERE tag LIKE '%#{word}%' ORDER BY id DESC"
+    vals = @db.query(sql)
+    
+    html = ""
+    
+    if vals.length > 0 then
+      html += make_show(vals)
+    else
+      html += "<div class='info' style='height: 350px;'>一致する検索結果がありませんでした。</div>"
+    end
+    
+    return html
+  
+  end
+  
+  def tag_list()
+    
+    sql = "SELECT tag FROM #{@table} GROUP BY tag LIMIT 5"
+    vals = @db.query(sql)
+    
+    html = ""
+    tags = []
+    
+    #puts $cgi.header()
+    vals.each do |row|
+      #puts row["tag"].to_s.class #.split(" ")
+      row["tag"].to_s.split(" ").each do |tag|
+        if tags.include?(tag) then
+        
+        else
+          tags.push(tag)
+          html += "<a href='#{@url}?mode=tag&word=#{tag}'>#{tag}</a>"
+        end
+        
+      end
+      
+    end
+    
+    html += "<a href='#{@url}?mode=tag'>[一覧表示]</a>"
+    return html
+  
+  end
+  
+  def tag_list_all()
+    
+    sql = "SELECT tag FROM #{@table} GROUP BY tag"
+    vals = @db.query(sql)
+    
+    html = ""
+    tags = []
+    
+    #puts $cgi.header()
+    vals.each do |row|
+      #puts row["tag"].to_s.class #.split(" ")
+      row["tag"].to_s.split(" ").each do |tag|
+        if tags.include?(tag) then
+        
+        else
+          tags.push(tag)
+          html += "<a href='#{@url}?mode=tag&word=#{tag}'>#{tag}</a>"
+        end
+        
+      end
+      
+    end
+    
+    return "<div class='tag_list'>#{html}</div>"
   
   end
   

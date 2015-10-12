@@ -46,6 +46,7 @@ class SelfSNS
     html += post_comment_form()
     html += find_form()
     html += set_photo_form()
+    html += select_tag_form()
     
     menu_logout()
     menu_profile()
@@ -75,6 +76,13 @@ class SelfSNS
     when "find"
       html += obj.find($_POST["word"])
       output(html)
+    when "tag"
+      if $_POST["word"].to_s == "" then
+        html += obj.tag_list_all()
+      else
+        html += obj.tag_filter($_POST["word"])
+      end
+      output(html)
     when "like"
       like = Likes.new()
       like.add()
@@ -99,8 +107,12 @@ class SelfSNS
       #  html += "<p>#{key} / #{val}</p>"
       #end
       #html += "</p>"
-      html += obj.show_profile($_GET["id"])
-      output(html)
+      print cgi.header({ 
+        "status"     => "REDIRECT",
+        "Location"   => @url
+      })
+#       html += obj.show_profile($_GET["id"])
+#       output(html)
     else
       html += obj.show()
       output(html)
@@ -189,6 +201,12 @@ EOF
     return load_template({},"set_photo.html")
   end
   
-  
+  def select_tag_form()
+    obj = Notes.new()
+    vals = {}
+    vals["tag"] = obj.tag_list()
+    #return load_template({"tag" => obj.make_category_list()},"select_tag.html")
+    return load_template(vals,"select_tag.html")
+  end
   
 end

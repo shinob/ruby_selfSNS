@@ -58,6 +58,11 @@ function show_find_form() {
 	$("find").style.display = "block";
 }
 
+function show_select_tag_form() {
+	hide_form();
+	$("select_tag").style.display = "block";
+}
+
 function show_post_comment_form(id) {
 	hide_form();
 	$("post_comment").style.display = "block";
@@ -77,6 +82,7 @@ function hide_form() {
 	$("post_note").style.display = "none";
 	$("post_photo").style.display = "none";
 	$("find").style.display = "none";
+	$("select_tag").style.display = "none";
 	$("post_comment").style.display = "none";
 	$("set_photo").style.display = "none";
 }
