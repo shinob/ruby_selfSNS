@@ -77,11 +77,12 @@ class SelfSNS
       html += obj.find($_POST["word"])
       output(html)
     when "tag"
-      if $_POST["word"].to_s == "" then
-        html += obj.tag_list_all()
-      else
-        html += obj.tag_filter($_POST["word"])
-      end
+      html += obj.tag($_POST["word"])
+      #if $_POST["word"].to_s == "" then
+      #  html += obj.tag_list_all()
+      #else
+      #  html += obj.tag_filter($_POST["word"])
+      #end
       output(html)
     when "like"
       like = Likes.new()

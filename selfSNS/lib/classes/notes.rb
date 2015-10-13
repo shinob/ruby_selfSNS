@@ -11,6 +11,8 @@ class Notes < Model
     @prof = Profiles.new()
     @url = ENV['REQUEST_URI'][0..ENV['REQUEST_URI'].rindex("/")]
     
+    @limit = 5
+    
   end
   
   def get_file_dir(id)
@@ -117,7 +119,7 @@ EOF
   def show()
     
     cnt = $_GET["cnt"].to_i
-    limit = 5
+    limit = @limit
     offset = 0
     
     if cnt > 0 then
@@ -138,17 +140,18 @@ EOF
       prv = ""
     end
     
-    if html != "" then
-      nxt = "<a href='#{@url}?cnt=#{cnt + 1}' class='nav' style='float: right'>古い投稿</a>"
-    else
+    #if html != "" then
+    if vals.length < @limit then
       nxt = ""
+    else
+      nxt = "<a href='#{@url}?cnt=#{cnt + 1}' class='nav' style='float: right'>古い投稿</a>"
     end
     
     if html != "" then
       html += "#{prv}#{nxt}"
     end
     
-    #html += "<div>#{@url}456</div>"
+    #html += "<div>#{vals.length}</div>"
     
     return <<EOF
 #{prv}
@@ -217,7 +220,7 @@ EOF
   
   def tag_list()
     
-    sql = "SELECT tag FROM #{@table} GROUP BY tag LIMIT 5"
+    sql = "SELECT tag, COUNT(*) AS num FROM #{@table} GROUP BY tag ORDER BY num DESC LIMIT 5"
     vals = @db.query(sql)
     
     html = ""
@@ -238,14 +241,14 @@ EOF
       
     end
     
-    html += "<a href='#{@url}?mode=tag'>[一覧表示]</a>"
+    html += "<a href='#{@url}?mode=tag' style='text-align: right;'>[一覧表示]</a>"
     return html
   
   end
   
   def tag_list_all()
     
-    sql = "SELECT tag FROM #{@table} GROUP BY tag"
+    sql = "SELECT tag, COUNT(*) AS num FROM #{@table} GROUP BY tag ORDER BY num DESC"
     vals = @db.query(sql)
     
     html = ""

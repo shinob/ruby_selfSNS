@@ -147,6 +147,7 @@ input {
 
 #select_tag a {
 	display: block;
+	padding: 5px 10px;
 }
 
 #select_tag a:hover {
