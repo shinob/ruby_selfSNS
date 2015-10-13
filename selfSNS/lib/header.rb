@@ -20,6 +20,7 @@ $templateDir = $currentDir + "templates/"
 $databaseDir = $currentDir + "databases/"
 
 classes = [
+  "../config.rb",
   "tools.rb",
   "aduser.rb",
   "dbconnect_sqlite3.rb",

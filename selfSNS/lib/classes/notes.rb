@@ -11,7 +11,7 @@ class Notes < Model
     @prof = Profiles.new()
     @url = ENV['REQUEST_URI'][0..ENV['REQUEST_URI'].rindex("/")]
     
-    @limit = 5
+    @limit = $notes_limit
     
   end
   
