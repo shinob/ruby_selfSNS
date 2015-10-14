@@ -16,7 +16,8 @@ class SelfSNS
     if $usr.is_login() then
       make_content()
     else
-      html = $usr.get_login_form()
+      html += $usr.get_login_form()
+      html += show_analects()
       menu_space()
       output(html)
       #@title = "ログイン"
@@ -208,6 +209,10 @@ EOF
     vals["tag"] = obj.tag_list()
     #return load_template({"tag" => obj.make_category_list()},"select_tag.html")
     return load_template(vals,"select_tag.html")
+  end
+  
+  def show_analects()
+    return load_template({},"analects.html")
   end
   
 end

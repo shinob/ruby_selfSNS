@@ -150,6 +150,7 @@ function make_login_key(frm) {
 	var seed = frm.pass.value + frm.num.value
 	frm.pass.value = CybozuLabs.MD5.calc(seed);
 	//alert(frm.pass.value);
+	frm.num.value = ""
 	
 	return true;
 	
